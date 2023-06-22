@@ -1,4 +1,7 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Scanner;
 
 /**
  * Створіть проект за допомогою IntelliJ IDEA. Потрібно: Описати клас з іменем Price, що містить такі поля:
@@ -11,14 +14,12 @@ import java.util.*;
  */
 
 public class Main {
+    public static Scanner scannerInputData = new Scanner(System.in);
+    private static int numberElements = 2;
+    private static ArrayList<Price> ListPrices = new ArrayList<>();
 
-
-    public static void main(String[] args) throws Exception {
-        Scanner scannerInputData = new Scanner(System.in);
-        int numberElements = 2;
-        List<Price> listPrices = new ArrayList<>();
+    public static void main(String[] args) {
         System.out.println("Enter data for" + numberElements + " products:");
-
         for (int i = 0; i < numberElements; i++) {
             System.out.println("product " + (i + 1) + ":");
             System.out.print("Name of product: ");
@@ -29,34 +30,30 @@ public class Main {
             double priceValue = scannerInputData.nextDouble();
             scannerInputData.nextLine();
             Price newPrice = new Price(productName, storeName, priceValue);
-            listPrices.add(newPrice);
+            ListPrices.add(newPrice);
         }
 
-        listPrices.sort(Comparator.comparing(Price::getStoreName));
+        Collections.sort(ListPrices, Comparator.comparing(Price::getStoreName));
         System.out.print("Enter the store name to search: ");
         String searchStore = scannerInputData.nextLine();
         System.out.println(searchStore);
-        getInfoProductByStore(searchStore, listPrices);
+        getInfoProductByStore(searchStore);
 
     }
-
-    public static void getInfoProductByStore(String searchStore, List<Price> listPrices) throws Exception {
-        boolean isNotFound = true;
-        for (Price listPrice : listPrices) {
-            if (listPrice.getStoreName().equalsIgnoreCase(searchStore)) {
-                System.out.println("Product: " + listPrice.getProductName());
-                System.out.println("Store: " + listPrice.getStoreName());
-                System.out.println("Price: " + listPrice.getProductPrice());
-                isNotFound = false;
+    public static void getInfoProductByStore(String searchStore) {
+        for (int i = 0; i < ListPrices.size(); i++) {
+            if (ListPrices.get(i).getStoreName().equalsIgnoreCase(searchStore)) {
+                System.out.println("Product: " + ListPrices.get(i).getProductName());
+                System.out.println("Store: " + ListPrices.get(i).getStoreName());
+                System.out.println("Price: " + ListPrices.get(i).getProductPrice());
+                break;
+            }else{
+                throw new RuntimeException("no such store found");
             }
         }
-        if (isNotFound) {
-            throw new Exception("No such store found");
-        }
     }
-
-
 }
+
 
 
 

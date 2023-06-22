@@ -1,12 +1,12 @@
 public class Price {
-    private final String storeName;
-    private final String productName;
-    private final Double productPrice;
+    private String storeName;
+    private String productName;
+    private Double productPrice;
 
-    public Price(String productName, String storeName, Double productPrice) {
-        this.productName = productName;
+    public Price(String storeName, String productName, Double productPrice) {
         this.storeName = storeName;
-        this.productPrice = productPrice;;
+        this.productName = productName;
+        this.productPrice = productPrice;
     }
 
     public String getStoreName() {
