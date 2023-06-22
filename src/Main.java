@@ -48,7 +48,7 @@ public class Main {
                 System.out.println("Price: " + ListPrices.get(i).getProductPrice());
                 break;
             }else{
-                throw new RuntimeException("no such store found");
+                throw new RuntimeException("No such store found");
             }
         }
     }
