@@ -3,7 +3,7 @@ public class Price {
     private String productName;
     private Double productPrice;
 
-    public Price(String storeName, String productName, Double productPrice) {
+    public Price(String productName, String storeName, Double productPrice) {
         this.storeName = storeName;
         this.productName = productName;
         this.productPrice = productPrice;
